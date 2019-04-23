@@ -1,35 +1,44 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+	/*
+	|--------------------------------------------------------------------------
+	| Web Routes
+	|--------------------------------------------------------------------------
+	|
+	| Here is where you can register web routes for your application. These
+	| routes are loaded by the RouteServiceProvider within a group which
+	| contains the "web" middleware group. Now create something great!
+	|
+	*/
 
-Route::get('/', function () {
-    return view('welcome');
-});
+	Route::get('/', function () {
+		return redirect('/earner');
+	});
 
 
-Route::prefix('api')->group(function () {
-    Route::get('oauth-link', 'AccountController@getFacebookApiUrl');
-    Route::get('attemp', 'AccountController@attemp');
-});
+	Route::prefix('api')->group(function () {
+		Route::get('oauth-link', 'AccountController@getFacebookApiUrl');
+		Route::post('attemp', 'AccountController@attemp');
+		Route::get('check-mission', 'PostController@checkMission')->middleware('check.auth');
+		Route::get('get-post', 'PostController@getRandomPost');
+		Route::get('get-share', 'PostController@getRandomShare');
+	});
 
-Route::prefix('admin')->group(function () {
-    Route::get('/', 'AdminController@dashboard');
+	Route::get('earner', 'AccountController@earner')->middleware('check.auth');
+	Route::get('login', 'AccountController@login');
+	Route::get('logout', 'AccountController@logout');
 
-    Route::get('/post', 'AdminController@post');
-    Route::get('/post/{id}', 'AdminController@delPost');
+	Route::prefix('adm')->middleware('check.auth')->group(function () {
+		Route::get('/', 'AdminController@dashboard');
 
-    Route::get('/share', 'AdminController@share');
-    Route::get('/share/{id}', 'AdminController@delShare');
-    //
-    Route::post('/post', 'AdminController@savePost');
-    Route::post('/share', 'AdminController@saveShare');
-});
+		Route::get('/post', 'AdminController@post');
+		Route::get('/post/{id}', 'AdminController@delPost');
+
+		Route::get('/share', 'AdminController@share');
+		Route::get('/share/{id}', 'AdminController@delShare');
+		//
+		Route::post('/post', 'AdminController@savePost');
+		Route::post('/share', 'AdminController@saveShare');
+	});
+
+	Route::post('log', 'LogController@store')->middleware('check.auth');

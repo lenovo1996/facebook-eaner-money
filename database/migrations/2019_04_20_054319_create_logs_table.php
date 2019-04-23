@@ -17,6 +17,7 @@ class CreateLogsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('account_id');
             $table->text('content');
+            $table->string('type');
             $table->timestamps();
         });
     }

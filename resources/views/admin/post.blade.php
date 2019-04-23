@@ -15,7 +15,7 @@
                     {!! nl2br(e(substr($item->message, 0, 200))) !!}...
                     <hr>
                     <a class="btn btn-primary" href="{{ $item->link }}">Go to link</a>
-                    <a class="btn btn-danger" href="/admin/post/{{ $item->id }}">Xóa</a>
+                    <a class="btn btn-danger" href="/adm/post/{{ $item->id }}">Xóa</a>
                 </div>
             </div>
         </div>
@@ -79,7 +79,9 @@
                 data[name] = val;
             });
 
-            $.post('/admin/post', data);
+            $.post('/adm/post', data).then(function () {
+				location.reload();
+			});
         });
     </script>
 @endsection

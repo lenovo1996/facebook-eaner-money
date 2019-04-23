@@ -108,7 +108,7 @@
             <!-- ### $Sidebar Menu ### -->
             <ul class="sidebar-menu scrollable pos-r">
                 <li class="nav-item mT-30 active">
-                    <a class="sidebar-link" href="/admin/">
+                    <a class="sidebar-link" href="/adm/">
                         <span class="icon-holder">
                           <i class="c-blue-500 ti-home"></i>
                         </span>
@@ -116,7 +116,7 @@
                     </a>
                 </li>
                 <li class="nav-item mT-30">
-                    <a class="sidebar-link" href="/admin/post">
+                    <a class="sidebar-link" href="/adm/post">
                         <span class="icon-holder">
                           <i class="c-blue-500 ti-home"></i>
                         </span>
@@ -124,7 +124,7 @@
                     </a>
                 </li>
                 <li class="nav-item mT-30">
-                    <a class="sidebar-link" href="/admin/share">
+                    <a class="sidebar-link" href="/adm/share">
                         <span class="icon-holder">
                           <i class="c-blue-500 ti-home"></i>
                         </span>
@@ -169,9 +169,6 @@
 <script src="/assets/scripts/bootstrap.min.js"></script>
 <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js"
         data-cf-settings="45e3d080e18c8653b5a972de-|49" defer=""></script>
-
-<script>
-</script>
 
 @yield('script')
 </body>

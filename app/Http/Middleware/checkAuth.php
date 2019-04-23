@@ -19,9 +19,13 @@ class checkAuth
             return $next($request);
         }
 
-        return response()->json([
-            'result' => false,
-            'msg' => 'Bạn chưa đăng nhập'
-        ]);
+        if ($request->ajax()) {
+	        return response()->json([
+		        'result' => false,
+		        'msg' => 'Bạn chưa đăng nhập'
+	        ]);
+        }
+
+		return redirect('login');
     }
 }
