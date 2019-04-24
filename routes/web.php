@@ -21,7 +21,7 @@
 		Route::post('attemp', 'AccountController@attemp');
 		Route::get('check-mission', 'PostController@checkMission')->middleware('check.auth');
 		Route::get('get-post', 'PostController@getRandomPost');
-		Route::get('get-share', 'PostController@getRandomShare');
+		Route::get('get-comment', 'PostController@getRandomComment');
 	});
 
 	Route::get('earner', 'AccountController@earner')->middleware('check.auth');
@@ -34,11 +34,11 @@
 		Route::get('/post', 'AdminController@post');
 		Route::get('/post/{id}', 'AdminController@delPost');
 
-		Route::get('/share', 'AdminController@share');
-		Route::get('/share/{id}', 'AdminController@delShare');
+		Route::get('/comment', 'AdminController@comment');
+		Route::get('/comment/{id}', 'AdminController@delComment');
 		//
 		Route::post('/post', 'AdminController@savePost');
-		Route::post('/share', 'AdminController@saveShare');
+		Route::post('/comment', 'AdminController@saveComment');
 	});
 
 	Route::post('log', 'LogController@store')->middleware('check.auth');

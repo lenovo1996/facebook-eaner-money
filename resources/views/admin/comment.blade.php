@@ -2,20 +2,16 @@
 
 @section('content')
     <div class="col-md-12">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#postModal">Thêm Share</button>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#postModal">Thêm Comment</button>
     </div>
 
     @foreach($share as $item)
         <div class="col-md-3">
             <div class="layers bd bgc-white p-20">
-                <div class="layer w-100 mB-10">
-                    <img src="{{ $item->picture }}" alt="" width="100%">
-                </div>
                 <div class="layer w-100">
                     {!! nl2br(e(substr($item->message, 0, 200))) !!}...
                     <hr>
-                    <a class="btn btn-primary" href="{{ $item->link }}">Go to link</a>
-                    <a class="btn btn-danger" href="/adm/share/{{ $item->id }}">Xóa</a>
+                    <a class="btn btn-danger" href="/adm/comment/{{ $item->id }}">Xóa</a>
                 </div>
             </div>
         </div>
@@ -30,24 +26,14 @@
          style="display: none;" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">Thêm Share</h5>
+                <div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">Thêm Comment</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
                     <form id="add-post">
-                        <div class="form-group col col-md-12">
-                            <input type="hidden" class="form-control" name="_token"
-                                   value="{{ csrf_token() }}">
-                            <label for="">Link:</label>
-                            <input type="text" class="form-control" name="link"
-                                   value="">
-                        </div>
-                        <div class="form-group col col-md-12">
-                            <label for="">Picture:</label>
-                            <input type="text" class="form-control" name="picture"
-                                   value="">
-                        </div>
+                        <input type="hidden" class="form-control" name="_token"
+                               value="{{ csrf_token() }}">
                         <div class="form-group col col-md-12">
                             <label for="">Message:</label>
                             <textarea type="text" class="form-control" name="message"></textarea>
@@ -79,8 +65,8 @@
                 data[name] = val;
             });
 
-            $.post('/adm/share', data).then(function () {
-            	location.reload();
+            $.post('/adm/comment', data).then(function () {
+                location.reload();
             });
         });
     </script>

@@ -13,11 +13,9 @@ class CreateSharesTable extends Migration
      */
     public function up()
     {
-        Schema::create('shares', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('message');
-            $table->string('link')->nullable();
-            $table->string('picture')->nullable();
             $table->timestamps();
         });
     }

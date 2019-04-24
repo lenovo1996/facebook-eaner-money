@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
-use App\Share;
+use App\Comment;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -19,10 +19,10 @@ class AdminController extends Controller
         return view('admin.post', compact('post'));
     }
 
-    public function share()
+    public function comment()
     {
-        $share = Share::orderBy('id', 'desc')->paginate(16);
-        return view('admin.share', compact('share'));
+        $share = Comment::orderBy('id', 'desc')->paginate(16);
+        return view('admin.comment', compact('share'));
     }
 
     public function savePost(Request $request)
@@ -36,20 +36,20 @@ class AdminController extends Controller
         ]);
     }
 
-    public function saveShare(Request $request)
+    public function saveComment(Request $request)
     {
-        $data = $request->only(['message', 'link', 'picture']);
+        $data = $request->only(['message']);
 
-        $result = Share::create($data);
+        $result = Comment::create($data);
 
         return response()->json([
             'result' => $result
         ]);
     }
 
-    public function delShare($id)
+    public function delComment($id)
     {
-        Share::find($id)->delete();
+        Comment::find($id)->delete();
         return back();
     }
 

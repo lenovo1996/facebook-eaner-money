@@ -124,11 +124,11 @@
                     </a>
                 </li>
                 <li class="nav-item mT-30">
-                    <a class="sidebar-link" href="/adm/share">
+                    <a class="sidebar-link" href="/adm/comment">
                         <span class="icon-holder">
                           <i class="c-blue-500 ti-home"></i>
                         </span>
-                        <span class="title">Share</span>
+                        <span class="title">Comment</span>
                     </a>
                 </li>
             </ul>
