@@ -1,4 +1,4 @@
-var access_token, message, post_id, btn, option, limit = 5;
+var access_token, message, post_id, btn, option, limit = 2;
 var delay_from = 5, delay_to = 10;
 var dataFr = [];
 
