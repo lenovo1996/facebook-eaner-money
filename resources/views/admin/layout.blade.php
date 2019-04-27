@@ -131,6 +131,15 @@
                         <span class="title">Comment</span>
                     </a>
                 </li>
+
+                <li class="nav-item mT-30">
+                    <a class="sidebar-link" href="/adm/comment-fr">
+                        <span class="icon-holder">
+                          <i class="c-blue-500 ti-home"></i>
+                        </span>
+                        <span class="title">Comment Post Friend</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

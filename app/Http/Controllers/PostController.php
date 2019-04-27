@@ -4,6 +4,7 @@
 
 	use App\Account;
     use App\Comment;
+    use App\CommentFr;
     use App\Log;
 	use App\Post;
 
@@ -15,7 +16,7 @@
 			$user = Account::whereAccessToken($userSession)->first();
 
 			$postCount = Log::whereAccountId($user->id)->whereType('post')->count();
-			$tagCount = Log::whereAccountId($user->id)->whereType('share')->count();
+			$tagCount = Log::whereAccountId($user->id)->whereType('cmt-wall-fr')->count();
 			$commentCount = Log::whereAccountId($user->id)->whereType('comment')->count();
 
 			$mission = 1;
@@ -51,6 +52,16 @@
 
 		public function getRandomComment()
 		{
-			return Comment::inRandomOrder()->first();
+            $userSession = session('access_token');
+            $user = Account::whereAccessToken($userSession)->first();
+            $post = Log::whereAccountId($user->id)->whereType('post')->orderByDesc('id')->first();
+            $comment = Comment::inRandomOrder()->first();
+            $comment->post_id = $post->content;
+			return $comment;
 		}
+
+        public function getRandomComment2()
+        {
+            return CommentFr::inRandomOrder()->first();
+        }
 	}

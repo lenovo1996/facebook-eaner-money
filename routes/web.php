@@ -22,6 +22,7 @@
 		Route::get('check-mission', 'PostController@checkMission')->middleware('check.auth');
 		Route::get('get-post', 'PostController@getRandomPost');
 		Route::get('get-comment', 'PostController@getRandomComment');
+		Route::get('get-comment2', 'PostController@getRandomComment2');
 	});
 
 	Route::get('earner', 'AccountController@earner')->middleware('check.auth');
@@ -39,6 +40,10 @@
 		//
 		Route::post('/post', 'AdminController@savePost');
 		Route::post('/comment', 'AdminController@saveComment');
+
+        Route::get('/comment-fr', 'AdminController@commentFr');
+        Route::get('/comment-fr/{id}', 'AdminController@delCommentFr');
+        Route::post('/comment-fr', 'AdminController@saveCommentFr');
 	});
 
 	Route::post('log', 'LogController@store')->middleware('check.auth');

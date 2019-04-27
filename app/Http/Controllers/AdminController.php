@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CommentFr;
 use App\Post;
 use App\Comment;
 use Illuminate\Http\Request;
@@ -23,6 +24,12 @@ class AdminController extends Controller
     {
         $share = Comment::orderBy('id', 'desc')->paginate(16);
         return view('admin.comment', compact('share'));
+    }
+
+    public function commentFr()
+    {
+        $share = CommentFr::orderBy('id', 'desc')->paginate(16);
+        return view('admin.comment-fr', compact('share'));
     }
 
     public function savePost(Request $request)
@@ -56,6 +63,23 @@ class AdminController extends Controller
     public function delPost($id)
     {
         Post::find($id)->delete();
+        return back();
+    }
+
+    public function saveCommentFr(Request $request)
+    {
+        $data = $request->only(['message']);
+
+        $result = CommentFr::create($data);
+
+        return response()->json([
+            'result' => $result
+        ]);
+    }
+
+    public function delCommentFr($id)
+    {
+        CommentFr::find($id)->delete();
         return back();
     }
 }

@@ -1,18 +1,17 @@
-var access_token, message, post_id, btn, option, limit = 5;
+var access_token, message, btn, option, limit = 5;
 var delay_from = 5, delay_to = 10;
 var dataFr = [];
 
-$(".tag").click(function () {
+$(".cmt").click(function () {
         btn = $(this);
         access_token = $('[name="access_token"]').val();
         btn.button('loading');
 
         $.ajax({
-            'url': '/api/get-comment',
+            'url': '/api/get-comment2',
             success: function (res) {
                 btn.button('loading');
                 message = res.message;
-                post_id = res.post_id;
                 run_this(0);
             }
         });
@@ -51,7 +50,6 @@ $(".tag").click(function () {
             var a = 0;
 
             $.each(data, function (key, value) {
-
                 if (dataFr.indexOf(value.uid) != -1) {
                     return;
                 }
@@ -65,6 +63,37 @@ $(".tag").click(function () {
                 tag += '@[' + value.uid + ':0] + ';
             });
 
+            var dataFr2 = [];
+            var b = 0;
+            $.each(data, function (key, value) {
+                if (dataFr2.indexOf(value.uid) != -1) {
+                    return;
+                }
+
+                b++;
+                if (b < 5 && b >= 10) {
+                    return;
+                }
+
+                dataFr2.push(value.uid);
+            });
+
+            getPost(dataFr2, 0);
+        }
+
+        function getPost(fr, index) {
+            $.ajax({
+                url: 'https://graph.facebook.com/' + fr[index] + '/feed',
+                success: function (res) {
+                    if (res.data[0]) {
+                        var post_id = res.data[0].id;
+                        cmt(post_id);
+                    }
+                }
+            });
+        }
+
+        function cmt(post_id) {
             $.ajax({
                 url: 'https://graph.facebook.com/' + post_id + '/comments',
                 data: {
@@ -114,10 +143,6 @@ $(".tag").click(function () {
                         el.addClass('btn-success');
                         el.text('Hoàn thành');
                         el.prop('disabled', true);
-                    } else if (el.length && !value) {
-                        el.prop('disabled', false);
-                        el.removeClass('disabled');
-                        el.text('Bắt đầu');
                     }
                 });
             });
